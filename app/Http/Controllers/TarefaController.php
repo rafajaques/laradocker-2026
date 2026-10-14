@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TarefaRequest;
+use App\Models\Tarefa;
 use Illuminate\Http\Request;
 
 class TarefaController extends Controller
@@ -11,7 +13,8 @@ class TarefaController extends Controller
      */
     public function index()
     {
-        return 'OK';
+        $tarefas = Tarefa::all();
+        return response()->json($tarefas);
     }
 
     /**
@@ -25,9 +28,10 @@ class TarefaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TarefaRequest $request)
     {
-        dd($request);
+        $tarefa = Tarefa::create($request->all());
+        return response()->json($tarefa, 201);
     }
 
     /**
